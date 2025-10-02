@@ -1,0 +1,14 @@
+# Summary
+This project was created to demonstrate my professional skills in architecture design, coding, implementing CI/CD practices, and deploying and managing infrastructure.
+
+The project code can be used for personal, commercial, and educational purposes without requiring permission.
+
+Please note that the developer is not responsible for keeping the repositories and documentation up to date with the latest industry standards. Additionally, the developer is not responsible for fixing bugs that may arise during usage or providing support for their resolution. Consider this when deciding on its use.
+
+# List of Repositories
+- [0-documentation](https://github.com/devops-skill-demonstration/0-documentation) - the repository consists all documentation that is related to the project, not to the specific repository
+- [1-gcp-initialization](https://github.com/devops-skill-demonstration/1-gcp-initialization) - the repository consists Terraform code for deploying GCP components that is the preparation for the next repository
+- [2-terraform-operational](https://github.com/devops-skill-demonstration/2-terraform-operational) - the repository consists Terraform code for deploying components inside GCP resources like Kubernetes Pods, Ingress configurations etc.
+- [3-terraform-configurational](https://github.com/devops-skill-demonstration/3-terraform-configurational)- the repository consists Terraform code for deploying configuration of the deployed components in the previous repository
+- [microservices-demo](https://github.com/devops-skill-demonstration/microservices-demo) - the repository is a fork of the Google's repository that represents ready-to-deploy application for Kubernetes and GCP environment
+
