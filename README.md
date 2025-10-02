@@ -47,6 +47,9 @@ Direct dependency between repositories:
 * SSH – Secure Shell
 * URL – Uniform Resource Locator
 
+> The documentation below is an AI translation of my diploma, original written in Ukrainian.
+
+> The AI translation was done using ChatGPT-5
 
 # 1. Analysis of the Subject Area and Problem Statement.
 ## > [CLICK-TO-OPEN](./1-analysis-of-the-subject.md)
@@ -54,5 +57,9 @@ Direct dependency between repositories:
 
 # 2. Analysis and Selection of Infrastructure Development Tools
 ## > [CLICK-TO-OPEN](./2-analysis-of-dev-tools.md)
+
+
+# 3. Development of the Project Solution
+## > [CLICK-TO-OPEN](./3-development-of-the-project.md)
 
 
