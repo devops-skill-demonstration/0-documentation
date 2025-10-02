@@ -12,6 +12,11 @@ Please note that the developer is not responsible for keeping the repositories a
 - [3-terraform-configurational](https://github.com/devops-skill-demonstration/3-terraform-configurational)- the repository consists Terraform code for deploying configuration of the deployed components in the previous repository
 - [microservices-demo](https://github.com/devops-skill-demonstration/microservices-demo) - the repository is a fork of the Google's repository that represents ready-to-deploy application for Kubernetes and GCP environment
 
+![](./README-assets/list-of-repositories.png)
+
+
+
+
 # Stack of Technologies
 [![techstack](https://skillicons.dev/icons?i=terraform,kubernetes,grafana,prometheus,gcp,gitlab,docker&theme=light)](https://skillicons.dev)
 - InfluxDB
