@@ -14,6 +14,9 @@ Please note that the developer is not responsible for keeping the repositories a
 
 ![](./README-assets/list-of-repositories.png)
 
+Direct dependency between repositories:
+![](./README-assets/repos-direct-dependency.png)
+
 
 
 
