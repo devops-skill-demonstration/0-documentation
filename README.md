@@ -24,3 +24,21 @@ Direct dependency between repositories:
 [![techstack](https://skillicons.dev/icons?i=terraform,kubernetes,grafana,prometheus,gcp,gitlab,docker&theme=light)](https://skillicons.dev)
 - InfluxDB
 - HAProxy
+
+
+# List of Conventional Signs, Symbols, Units, Abbreviations, and Terms.
+- API – Application Programming Interface
+- AWS – Amazon Web Services
+- CI/CD – Continuous Integration / Continuous Deployment
+- CSM – Customer Success Manager
+- DNS – Domain Name System
+- DevOps – Development + Operations
+- GCP – Google Cloud Platform
+- GKE – Google Kubernetes Engine
+- HTTP – HyperText Transfer Protocol
+- IP – з англ. Internet Protocol
+- IaC – Infrastructure as Code
+- KAS – Kubernetes Agent Server
+- SSH – Secure Shell
+- URL – Uniform Resource Locator
+
