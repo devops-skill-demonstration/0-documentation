@@ -11,7 +11,7 @@ To meet the current needs of the software development process, a modern DevOps s
 This solution is relevant and valuable in the market due to its flexibility and ability to address the modern challenges of various organizations. This assertion is based on a market analysis taking into account the requirements set by employers in technology companies. The infrastructure solution uses modern approaches to ensure effective task execution, thereby satisfying the key needs of the IT market and allowing the solution logic to be expanded.
 
 
-Table 1.1 – Ranking of Technologies in the Labor Market According to the Study
+**Table 1.1 – Ranking of Technologies in the Labor Market According to the Study**
 ![](./README-assets/chapter-1-1.png)
 
 

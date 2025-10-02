@@ -37,10 +37,10 @@ For the implementation and maintenance of a DevOps infrastructure, it is advisab
 
 To implement Agile and Scrum, the Jira software [14] will be used, which is one of the most well-known tools in this domain and provides all the necessary features for effective team collaboration.
 
-Figure 2.1 – Jira page with the project timeline opened.
+**Figure 2.1 – Jira page with the project timeline opened.**
 ![](./README-assets/chapter-2-1.png)
 
-Figure 2.2 – Contents of the epic “[MVP] Documenting.”
+**Figure 2.2 – Contents of the epic “[MVP] Documenting.”**
 ![](./README-assets/chapter-2-2.png)
 
 
@@ -72,7 +72,7 @@ As part of this thesis, the deployment of the ready-made application “Online B
 
 The application already includes built containers and manifest files intended for deployment using Kubernetes. This solution was pre-configured by the developers of “Online Boutique,” and the role of the DevOps engineer is to provide the necessary infrastructure using Kubernetes orchestration tools.
 
-Figure 2.3 – Architecture of the application for deployment [17].
+**Figure 2.3 – Architecture of the application for deployment [17].**
 ![](./README-assets/chapter-2-3.png)
 
 
@@ -154,8 +154,8 @@ The complete list of technologies used includes:
 
 This detailed analysis highlights the key aspects necessary to understand each infrastructure component in the context of the architectural solution, encompassing the processes of development, building, testing, deployment, monitoring, and maintenance of the implemented infrastructure.
 
-Figure 2.4 – Project infrastructure diagram.
+**Figure 2.4 – Project infrastructure diagram.**
 ![](./README-assets/chapter-2-4.png)
 
-Figure 2.5 – Project continuous integration and deployment diagram.
+**Figure 2.5 – Project continuous integration and deployment diagram.**
 ![](./README-assets/chapter-2-5.png)
