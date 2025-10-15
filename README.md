@@ -1,4 +1,10 @@
-# Summary
+# 🇺🇦 Introduction in Ukrainian
+
+Наступний репозиторій було створено для мого дипломного проєкту в Харківському Авіаційному Університеті. Всі матеріали, пов’язані з дипломом, опубліковані в цьому репозиторії в оригінальній мові (українською). Вони розміщені у папці ua-documents. Readme, який ви бачите, було перекладено за допомогою штучного інтелекту.
+
+Всі матеріали можуть використовуватися лише як довідкові.
+
+# 🇺🇸 Summary
 This project was created to demonstrate my professional skills in architecture design, coding, implementing CI/CD practices, and deploying and managing infrastructure.
 
 The project code can be used for personal, commercial, and educational purposes without requiring permission.
