@@ -421,3 +421,195 @@ To verify proper dashboard functionality with Prometheus as a data source, open 
 ![](./README-assets/chapter-3-1-41.png)
 
 The data is displayed correctly, confirming successful data collection via Prometheus and its availability in Grafana for visualization.
+
+## 2 Deployment of Infrastructure in the Cloud
+
+After all infrastructure components have been deployed locally and their functionality successfully verified, the process of migration to the cloud environment can begin. Thanks to the infrastructure architecture built on Kubernetes, deployment flexibility and extensive testing capabilities are ensured. Once development and local testing are complete, the migration to the cloud can be performed with confidence, without concerns about compatibility issues, since containerization unifies the development and production environments.
+
+### 2.1 Enabling the Service Management API
+
+Before starting work with a cloud provider, a registered and verified account is required. In this work, this process will not be considered; it is assumed that the account has already been created.
+The Service Management API in Google Cloud Platform (GCP) is an application programming interface that provides centralized management of services, including their creation, configuration, publishing, versioning, and monitoring. This API allows developers to manage the lifecycle of their own APIs and services registered in Google Cloud Endpoints, as well as interact with existing GCP services. The Service Management API supports authentication, logging, monitoring, and quota management, ensuring reliability and security in the use of cloud services. This API service is required to establish an API connection between Terraform and the cloud provider. The “Service Management API” service is enabled in the corresponding section of Google Cloud Platform.
+
+**Figure 3.42 – Enabled API service “Service Management API.”**
+![](./README-assets/chapter-3-1-42.png)
+
+After that, in the “Service Management API” configuration, you can create a “Service Account” and download the **account.json** file, which contains the data required for authentication with this service account.
+
+1 – creation of “Service Account”;
+2 – created “Service Account” for Terraform
+
+**Figure 3.43 – Created service account.**
+![](./README-assets/chapter-3-1-43.png)
+
+The obtained **account.json** file must be placed in the repositories **“1-gcp-initialization”**, **“2-terraform-operational”**, and **“3-terraform-configurational.”** The Terraform code is already configured to work with such files; therefore, no additional actions are required.
+It is important to note that this file is **not tracked by the Git version control system**, as it is listed in the **“.gitignore”** file, which in turn is responsible for ignoring unnecessary files.
+This ensures protection against the leakage of secret values to the internet from the DevOps engineer’s workstation due to possible negligence.
+
+1 – file with secret values in “1-gcp-initialization”;
+2 – in “2-terraform-operational”
+
+**Figure 3.44 – Placement of the file with secret values in the repositories.**
+![](./README-assets/chapter-3-1-44.png)
+
+### 2.2 Switching the Environment in the Code
+
+After this, it is necessary to rename the current **state file** in the **“2-terraform-operational”** repository to avoid conflicts between working environments.
+The **“-local.tf”** file should be disabled by renaming it to **“-local-.tf.disabled”**, and for the **“-remote.tf.disabled”** files, perform the reverse operation.
+This way, the interaction between the local and cloud environments is separated.
+
+**Figure 3.45 – Switching to using the cloud provider.**
+![](./README-assets/chapter-3-1-45.png)
+
+### 2.3 Initialization of Cloud Infrastructure
+
+After completing the previous operation, we already have Terraform repositories configured for use. Next, we need to initialize the cloud infrastructure using the repository “1-gcp-initialization”. To do this, navigate to the corresponding repository, execute the command, and confirm the creation of resources by typing “yes”. Execute the following command:
+
+```bash
+terraform apply
+```
+
+1 – list of resources to be created;
+2 – confirmation prompt for creation;
+3 – real-time list of created resources;
+4 – overall result of resource creation.
+
+**Figure 3.46 – Creating a Kubernetes cluster via Terraform.**
+![](./README-assets/chapter-3-1-46.png)
+
+The creation of all resources may take approximately 10 minutes, as the cloud provider needs to allocate and configure resources according to the described Terraform code. Using this approach significantly simplifies interaction with the cloud provider and allows more detailed control over the infrastructure. After their creation, the presence of resources can be verified in the GCP console.
+
+**Figure 3.47 – Created Kubernetes cluster in the cloud environment.**
+![](./README-assets/chapter-3-1-47.png)
+
+**Figure 3.48 – Created virtual server for the Kubernetes cluster.**
+![](./README-assets/chapter-3-1-48.png)
+
+A virtual server (node) in the context of Google Cloud Platform (GCP) is a virtual machine instance created using the Google Compute Engine service, which provides computing resources for deploying and running applications. Nodes are the primary components of a Kubernetes cluster — a container orchestration system that automates the deployment, scaling, and management of containerized applications. In a Kubernetes cluster, nodes are divided into control plane and worker nodes, where the former are responsible for overall cluster management, and the latter execute containerized workloads. In GCP, a Kubernetes cluster is typically implemented through the Google Kubernetes Engine (GKE) service, which simplifies the creation, scaling, and administration of clusters integrated with other Google cloud services.
+
+### 2.4 Deployment of DevOps Infrastructure Components in Kubernetes
+
+Next, we proceed to the initialization of the infrastructure within the Kubernetes cluster using the repository “2-terraform-operational”. Execute the command within the repository and confirm its execution by typing “yes”:
+
+```bash
+terraform apply
+```
+
+**Figure 3.49 – Creating components within the Kubernetes cluster via Terraform.**
+![](./README-assets/chapter-3-1-49.png)
+
+## 2.5 Verification of Infrastructure Deployment
+
+After completing the operations, the infrastructure should already be successfully created and initialized for configuration. The next step is manual verification using the GCP console, through which you can connect to the Kubernetes cluster:
+
+1 – opening the connection window;
+2 – connecting to the console.
+
+**Figure 3.50 – Connecting to the Kubernetes cluster console through the cloud environment.**
+![](./README-assets/chapter-3-1-50.png)
+
+After connecting to the GCP console and Kubernetes cluster, you can run the first command to verify the infrastructure within the namespace **“infrastructure”**, which contains the main components of the DevOps infrastructure:
+
+```bash
+kubectl get po -n infrastructure
+```
+
+**Figure 3.51 – List of all running components inside the Kubernetes cluster within the “infrastructure” namespace.**
+![](./README-assets/chapter-3-1-51.png)
+
+Next, check the **“HAProxy”** component within the **“app-and-infra”** namespace, which contains components that interact with both the DevOps infrastructure and the main application:
+
+```bash
+kubectl get po -n app-and-infra
+```
+
+**Figure 3.52 – List of all running components inside the Kubernetes cluster within the “app-and-infra” namespace.**
+![](./README-assets/chapter-3-1-52.png)
+
+Based on the provided screenshot, it can be concluded that the infrastructure deployment was successful.
+
+### 2.6 Setting DNS Records for the Load Balancer
+
+The next step is to obtain the IP address of the load balancer and create DNS records on the DNS server. For this purpose, the repository **“2-terraform-operational”** contains the module **“4-module-namecheap”**, which is responsible for record creation. The process of domain zone creation and registration is not considered here.
+
+To obtain the load balancer’s IP address:
+
+1 – select the load balancer in the GCP console;
+2 – public IP address of the load balancer.
+
+**Figure 3.53 – Public address of the load balancer.**
+![](./README-assets/chapter-3-1-53.png)
+
+Afterward, record the obtained value in the repository variable file **“terraform.vars”**.
+
+**Figure 3.54 – Updating the public address for the DNS module.**
+![](./README-assets/chapter-3-1-54.png)
+
+Then, apply the changes and wait 3–5 minutes for the DNS records to update and become publicly accessible.
+
+### 2.7 Connection Verification via DNS Address
+
+Run the connection verification script, which was previously implemented during the deployment of DevOps infrastructure components in the local Kubernetes cluster:
+
+**Figure 3.55 – Connection verification using an automated script.**
+![](./README-assets/chapter-3-1-55.png)
+
+As expected, all components, except for the main application, were successfully deployed and are already available for use.
+
+### 2.8 Application Deployment Using GitLab CI/CD
+
+The next step involves deploying the application using GitLab CI/CD. To do this, all actions described during local deployment must be repeated, namely: authentication using login and password, API token generation, creation of resources using **“3-terraform-configurational”**, and repository uploading. These steps are omitted in this section since they were detailed earlier during local infrastructure deployment.
+
+Next, proceed to the running pipeline after uploading the source code to the GitLab repository.
+
+**Figure 3.56 – Result of the automatically triggered pipeline.**
+![](./README-assets/chapter-3-1-56.png)
+
+According to the figure, all stages were completed successfully: the application was built, tested, and deployed to the server, and the necessary metrics were recorded.
+Proceed to the application page and verify its functionality.
+
+1 – cloud environment deployment indicator.
+
+**Figure 3.57 – Application page after pipeline execution.**
+![](./README-assets/chapter-3-1-57.png)
+
+The **“Google Cloud”** label on the left confirms that the application was correctly deployed in the cloud environment within the Kubernetes cluster. It also confirms that the load balancer is properly configured and routes requests in the correct direction.
+
+### 2.9 Verification of Data Collection and Visualization System
+
+Next, it is necessary to verify the correctness of the data collection and visualization system.
+To check data collection, open the most recently executed pipeline and navigate to the **“0-end-measure”** stage, specifically the **“on_success”** step, which immediately indicates successful execution.
+
+**Figure 3.58 – Sending data via API request to InfluxDB.**
+![](./README-assets/chapter-3-1-58.png)
+
+Based on the console output, it can be concluded that the data was successfully sent to InfluxDB: execution time was calculated successfully, and the request to InfluxDB was completed without returning an error code.
+Now, verify this directly in the InfluxDB database. Navigate to the **“Explore Data”** tool and execute a query from the **“default”** bucket, requesting all data including status and pipeline execution duration.
+
+**Figure 3.59 – Result of the query to InfluxDB for all data.**
+![](./README-assets/chapter-3-1-59.png)
+
+After confirming the successful record in the InfluxDB database, the next step is to verify the configured connection through Terraform code in the Grafana visualization tool.
+Open Grafana and navigate to the **“Application Pipeline Monitoring”** dashboard.
+
+**Figure 3.60 – Visualization of newly created data in Grafana.**
+![](./README-assets/chapter-3-1-60.png)
+
+The graphs on the **“Application Pipeline Monitoring”** dashboard display the results of two pipelines, specifically the execution result and execution time. The data is displayed correctly without errors, indicating that the data from the InfluxDB data source was successfully received and visualized.
+Based on this, it can be fully confirmed that the infrastructure has been successfully deployed, all components were manually verified, and the infrastructure is ready for operation.
+
+### Conclusions of the Section
+
+In this section, the infrastructure corresponding to modern DevOps requirements was implemented. The primary focus was on automating processes using Terraform, GitLab CI/CD, and Kubernetes, ensuring reproducibility, scalability, and environment stability.
+
+Initially, a local infrastructure was created using Docker Desktop with Kubernetes enabled, simulating a production environment. The Terraform code was structured, and separate repositories were created for infrastructure initialization, operation, and configuration, improving manageability and scalability.
+
+The flexible use of the **Common Module Pattern** standardized modules, while automated deployment of GitLab, Prometheus, Grafana, and other services demonstrated the effectiveness of the Infrastructure as Code approach. Correct DNS configuration was implemented, ensuring service availability under specified domains.
+
+Simultaneously, a CI/CD system was configured with detailed pipelines covering linting, building, testing, deployment, and monitoring. This approach provided full automation of the application lifecycle, significantly reducing the time to deliver changes to the production environment.
+
+Special attention was given to monitoring: pipeline operation data was visualized through Grafana using metrics from InfluxDB. Integration with Prometheus ensured comprehensive monitoring of the Kubernetes cluster and its components.
+
+Finally, the local infrastructure was migrated to the Google Cloud Platform environment. Reusing the Terraform code allowed this process to occur with minimal modifications, demonstrating the versatility of the chosen architecture.
+
+Thus, the implemented solution proved effective, enabling rapid deployment, configuration, and scaling of infrastructure both locally and in the cloud. This confirms the suitability of the chosen approach and technologies for modern DevOps-based software development environments.
