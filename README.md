@@ -54,12 +54,14 @@ Direct dependency between repositories:
 # 1. Analysis of the Subject Area and Problem Statement.
 ## > [CLICK-TO-OPEN](./1-analysis-of-the-subject.md)
 
-
 # 2. Analysis and Selection of Infrastructure Development Tools
 ## > [CLICK-TO-OPEN](./2-analysis-of-dev-tools.md)
-
 
 # 3. Development of the Project Solution
 ## > [CLICK-TO-OPEN](./3-development-of-the-project.md)
 
+# 4. Testing and Verification
+## > [CLICK-TO-OPEN](./4-testing-and-verification.md)
 
+# 5. Economic Section
+## > [CLICK-TO-OPEN](./5-economic-section.md)
