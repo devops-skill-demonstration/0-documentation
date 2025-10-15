@@ -1,0 +1,1 @@
+This part was not translated because the calculations aren't relevant at the moment of the translation, consider reviwing the original in case of needed.
